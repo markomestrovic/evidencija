@@ -21,7 +21,7 @@ function Records() {
 
   async function getRecords() {
     // const { data } = await supabase.from("records").select("*");
-    let { data, error } = await supabase.rpc("get_records_with_students");
+    const { data, error } = await supabase.rpc("get_records_with_students");
     if (error) console.error(error);
     else console.log(data);
     console.log("DATA", data);
@@ -37,18 +37,18 @@ function Records() {
   };
   return (
     <div className="container">
-      <h2>Evidencije</h2>
+      <h2>Evidencije</h2><br/>
+      <h4>Ime | Prezime | Datum i vrijeme timbranja | Bluetooth ID</h4>
       <ul className="records">
         {records?.map((record) => (
           <li
-            key={record?.bluetooth_id}
+            key={record?.record_id}
             // onClick={() => {
             //   navigate("/records/" + record?.bluetooth_id);
             // }}
           >
-            {record?.firstname} {record?.lastname} <span>Bluetooth ID:</span>
-            {record?.bluetooth_id}{" "}
-            <button
+            {record?.firstname} | {record?.lastname} | {record?.record_created_at} | {record?.bluetooth_id}
+            <button id="iks"
               className="delete"
               onClick={() => {
                 deleteRecord(record.record_id);
