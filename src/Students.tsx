@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./Students.css";
 import { Tables } from "./types/supabase";
 import { supabase } from "./supabaseClient";
+import { Link } from "react-router-dom";
 
 function Students() {
   const [students, setStudents] = useState<Tables<"student">[]>();
@@ -17,12 +18,13 @@ function Students() {
   }, []);
   return (
     <div className="container">
-      <h2>Studenti</h2><br/>
-      <h4>Ime | Prezime | Bluetooth_ID</h4>
+      <Link id = "link" className="button" to="/" relative="path"><button>Evidencija</button></Link>
+      <br/><br/><h2>Studenti</h2><br/>
+      <h4>Ime prezime | Bluetooth_ID</h4>
       <ul>
         {students?.map((student) => (
           <li key={student?.firstname}>
-            {student?.firstname + " | " + student?.lastname+"  |  "+student?.bluetooth_id}
+            {student?.firstname +" "+ student?.lastname+" | "+ student?.bluetooth_id}
           </li>
         ))}
       </ul>

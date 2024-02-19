@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Students.css";
 import { supabase } from "./supabaseClient";
+import { Link } from "react-router-dom";
 
 type RecordsWithStudentInfo =
   | {
@@ -37,8 +38,9 @@ function Records() {
   };
   return (
     <div className="container">
-      <h2>Evidencije</h2><br/>
-      <h4>Ime | Prezime | Datum i vrijeme timbranja | Bluetooth ID</h4>
+      <Link id="link1" to="/students" relative="path"><button>Studenti</button></Link>
+      <br/><br/><h2>Evidencija</h2><br/>
+      <h4>Ime prezime | Datum i vrijeme timbranja | Bluetooth ID</h4>
       <ul className="records">
         {records?.map((record) => (
           <li
@@ -47,8 +49,8 @@ function Records() {
             //   navigate("/records/" + record?.bluetooth_id);
             // }}
           >
-            {record?.firstname} | {record?.lastname} | {record?.record_created_at} | {record?.bluetooth_id}
-            <button id="iks"
+            {record?.firstname} {record?.lastname} | {record?.record_created_at} | {record?.bluetooth_id}
+            <button
               className="delete"
               onClick={() => {
                 deleteRecord(record.record_id);

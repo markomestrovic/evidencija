@@ -8,7 +8,7 @@
   text-align: center;
   place-items: center;
   min-height: 100vh;
-  background: black;
+  background: white;
 }
 
 .container ul {
@@ -16,9 +16,20 @@
 }
 
 h2 {
-  color: aqua;
+  color: black;
+  font-size:28px
+}
+
+button {
+  background-color:rgb(184, 184, 184);
+  font-size:24px;
+  font-weight: 400;
 }
 
 .delete{
   margin-left: 1rem;
+}
+
+h4 {
+  font-size:20px;
 }
