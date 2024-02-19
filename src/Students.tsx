@@ -2,18 +2,12 @@ import { useEffect, useState } from "react";
 import "./Students.css";
 import { Tables } from "./types/supabase";
 import { supabase } from "./supabaseClient";
-import { useParams } from "react-router-dom";
 
 function Students() {
-  const { id } = useParams();
   const [students, setStudents] = useState<Tables<"student">[]>();
 
   async function getStudents() {
-    if (!id) return;
-    const { data } = await supabase
-      .from("student")
-      .select("*")
-      .eq("record_id", id);
+    const { data } = await supabase.from("student").select("*");
     console.log(data);
     data && setStudents(data);
   }

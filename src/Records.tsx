@@ -1,34 +1,61 @@
 import { useEffect, useState } from "react";
 import "./Students.css";
-import { Tables } from "./types/supabase";
 import { supabase } from "./supabaseClient";
-import { useNavigate } from "react-router-dom";
 
+type RecordsWithStudentInfo =
+  | {
+      record_id: number;
+      record_created_at: string;
+      student_id: number;
+      student_created_at: string;
+      firstname: string;
+      lastname: string;
+      bluetooth_id: string;
+    }[]
+  | null;
 function Records() {
-  const [records, setRecords] = useState<Tables<"records">[]>();
-  const navigate = useNavigate();
+  const [records, setRecords] = useState<RecordsWithStudentInfo>();
   useEffect(() => {
     getRecords();
   }, []);
 
   async function getRecords() {
-    const { data } = await supabase.from("records").select("*");
-    console.log(data);
+    // const { data } = await supabase.from("records").select("*");
+    let { data, error } = await supabase.rpc("get_records_with_students");
+    if (error) console.error(error);
+    else console.log(data);
+    console.log("DATA", data);
     data && setRecords(data);
   }
 
+  const deleteRecord = async (record_id: number) => {
+    const { error } = await supabase
+      .from("records")
+      .delete()
+      .eq("id", record_id);
+    if (error) console.error(error);
+  };
   return (
     <div className="container">
       <h2>Evidencije</h2>
       <ul className="records">
         {records?.map((record) => (
           <li
-            key={record?.id}
-            onClick={() => {
-              navigate("/records/" + record?.id);
-            }}
+            key={record?.bluetooth_id}
+            // onClick={() => {
+            //   navigate("/records/" + record?.bluetooth_id);
+            // }}
           >
-            {record?.id}{" "}
+            {record?.firstname} {record?.lastname} <span>Bluetooth ID:</span>
+            {record?.bluetooth_id}{" "}
+            <button
+              className="delete"
+              onClick={() => {
+                deleteRecord(record.record_id);
+              }}
+            >
+              X
+            </button>
           </li>
         ))}
       </ul>
