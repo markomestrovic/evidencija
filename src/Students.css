@@ -12,7 +12,7 @@
 }
 
 .container ul {
-  display: flex;gi
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   margin-top: 1rem;
