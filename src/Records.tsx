@@ -18,7 +18,7 @@ function Records() {
   const [records, setRecords] = useState<RecordsWithStudentInfo>();
   useEffect(() => {
     getRecords();
-  }, []);
+  }, [records]);
 
   async function getRecords() {
     // const { data } = await supabase.from("records").select("*");
@@ -45,9 +45,6 @@ function Records() {
         {records?.map((record) => (
           <li
             key={record?.record_id}
-            // onClick={() => {
-            //   navigate("/records/" + record?.bluetooth_id);
-            // }}
           >
             {record?.firstname} {record?.lastname} | {record?.record_created_at} | {record?.bluetooth_id}
             <button

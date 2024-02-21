@@ -12,7 +12,16 @@
 }
 
 .container ul {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   margin-top: 1rem;
+  align-content: center;
+  align-items:flex-end;
+}
+
+li {
+  padding-bottom: 5px;
 }
 
 h2 {

@@ -15,7 +15,7 @@ function Students() {
 
   useEffect(() => {
     getStudents();
-  }, []);
+  }, [students]);
   return (
     <div className="container">
       <Link id = "link" className="button" to="/" relative="path"><button>Evidencija</button></Link>
